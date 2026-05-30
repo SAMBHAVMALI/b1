@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy 20th Birthday! ✨</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -39,7 +38,7 @@
             line-height: 1.6;
         }
 
-        /* Noise Overlay for Vintage/Scrapbook Texture */
+        /* Scrapbook Texture Overlay */
         body::before {
             content: "";
             position: fixed;
@@ -50,7 +49,17 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Typography & Components */
+        /* Lightning Flash Screen Overlay */
+        #sky-flash-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #ffffff;
+            opacity: 0;
+            z-index: 9990;
+            pointer-events: none;
+            transition: opacity 0.1s ease;
+        }
+
         .handwritten {
             font-family: 'Alex Brush', cursive;
             font-size: 2.5rem;
@@ -62,6 +71,16 @@
             font-weight: 600;
             font-style: italic;
             letter-spacing: 0.5px;
+        }
+
+        /* Bottom-to-Top Floating Entrance Animation */
+        .slide-up-text {
+            animation: slideUpEntrance 1.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+        }
+
+        @keyframes slideUpEntrance {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .premium-btn {
@@ -85,11 +104,10 @@
         }
 
         .premium-btn:active {
-            transform: scale(0.97);
+            transform: scale(0.94);
             box-shadow: 0 3px 10px rgba(181, 124, 128, 0.1);
         }
 
-        /* Scrapbook Layout Assets */
         .washi-tape {
             position: absolute;
             width: 90px;
@@ -114,9 +132,9 @@
 
         .polaroid {
             background: white;
-            padding: 14px 14px 35px 14px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.03);
+            padding: 12px 12px 30px 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.02);
             transform: rotate(var(--r, 0deg));
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 100%;
@@ -129,13 +147,12 @@
         }
         .polaroid-caption {
             font-family: 'Alex Brush', cursive;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             text-align: center;
-            margin-top: 12px;
+            margin-top: 10px;
             color: var(--charcoal);
         }
 
-        /* Core Structure */
         section {
             min-height: 100vh;
             width: 100vw;
@@ -159,7 +176,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Global Interactive Ambient Canvas */
         #ambient-canvas {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -175,6 +191,12 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+        }
+
+        /* SECTION 0: PRE-INTRO SCREEN */
+        #pre-intro-section {
+            background: radial-gradient(circle at center, #2c2541 0%, #0f0d1a 100%);
+            color: #fff;
         }
 
         /* SECTION 1: GRAND INTRODUCTION */
@@ -247,6 +269,14 @@
             position: relative;
             z-index: 4;
             box-shadow: 0 0 20px rgba(223, 186, 107, 0.1);
+            transition: transform 0.2s ease;
+        }
+        .hold-btn.pulsing {
+            animation: holdPulse 0.6s infinite alternate;
+        }
+        @keyframes holdPulse {
+            from { transform: scale(1); box-shadow: 0 0 20px rgba(223, 186, 107, 0.2); }
+            to { transform: scale(1.08); box-shadow: 0 0 35px rgba(223, 186, 107, 0.6); }
         }
         .hold-progress-svg {
             position: absolute;
@@ -265,16 +295,20 @@
             transition: stroke-dashoffset 0.1s linear;
         }
 
-        /* SECTION 3: INTERACTIVE BIRTHDAY CAKE */
+        /* SECTION 3: IMMERSIVE DARK-THEMED CAKE CUTTING ENVIRONMENT */
+        #cake-section {
+            background: radial-gradient(circle at center, #1b1622 0%, #0a080d 100%);
+            color: #fceade;
+        }
         .cake-container {
             position: relative;
-            width: 220px; height: 260px;
+            width: 260px; height: 340px;
             margin: 30px 0;
         }
         .cake-canvas-overlay {
             position: absolute;
-            top: -150px; left: -90px;
-            width: 400px; height: 400px;
+            top: -200px; left: -70px;
+            width: 400px; height: 520px;
             pointer-events: none;
             z-index: 10;
         }
@@ -285,9 +319,9 @@
             width: 180px; height: 110px;
             background: linear-gradient(180deg, #fff2f2 0%, var(--pink-soft) 100%);
             border-radius: 12px 12px 6px 6px;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.07);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
             border: 1px solid rgba(181, 124, 128, 0.2);
-            transition: transform 0.6s ease;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .luxury-cake::before {
             content: '';
@@ -316,21 +350,22 @@
             position: absolute;
             top: 112px; left: 50%;
             transform: translateX(-50%);
-            width: 10px; height: 45px;
+            width: 12px; height: 45px;
             background: linear-gradient(90deg, var(--lavender), #ffffff);
             border-radius: 3px;
             z-index: 5;
             cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .candle-wick {
             position: absolute;
-            top: -6px; left: 4px;
+            top: -6px; left: 5px;
             width: 2px; height: 7px;
             background: #444;
         }
         .candle-flame {
             position: absolute;
-            top: -20px; left: -2px;
+            top: -20px; left: -1px;
             width: 14px; height: 16px;
             background: radial-gradient(circle at bottom, #ffea4a 0%, #ff7300 100%);
             border-radius: 50% 50% 20% 20%;
@@ -342,20 +377,25 @@
             0% { transform: scale(1) rotate(-2deg); }
             100% { transform: scale(1.05) rotate(3deg); }
         }
+
+        /* Small-to-Medium Optimized Draggable Knife */
         .knife-tool {
             position: absolute;
-            top: 80px; right: -20px;
-            font-size: 2.2rem;
-            transform: rotate(-45deg);
+            top: 20px; left: 50%;
+            transform: translateX(-50%) rotate(0deg);
+            font-size: 2.8rem;
             cursor: grab;
-            z-index: 8;
+            z-index: 12;
             opacity: 0;
-            transition: all 0.5s ease;
+            transition: opacity 0.5s ease, transform 0.3s ease;
             user-select: none;
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
         }
         .knife-tool.visible { opacity: 1; }
-        .cake-cut-left { transform: translateX(-40px) rotate(-5deg) !important; }
-        .cake-cut-right { transform: translateX(40px) rotate(5deg) !important; }
+        .knife-tool.cutting { transform: translateX(-50%) rotate(90deg) scale(1.1); cursor: grabbing; }
+        .cake-cut-left { transform: translateX(-65px) rotate(-8deg) !important; }
+        .cake-cut-right { transform: translateX(65px) rotate(8deg) !important; }
 
         /* SECTION 4: A LITTLE GIFT FOR YOU */
         .gift-scene {
@@ -405,7 +445,7 @@
             transform: translate3d(-30px, -60px, 20px) rotateZ(-65deg);
         }
 
-        /* SECTION 5 & 7: SCRAPBOOK FORMATS */
+        /* SECTION 5: SCRAPBOOK FORMATS */
         .scrapbook-desk {
             background: #FAF6F0;
             border: 1px solid #eaddd3;
@@ -420,7 +460,6 @@
             background: #fffdf2;
             padding: 16px;
             border-left: 3px solid var(--pink-dark);
-            font-size: 0.92rem;
             text-align: left;
             box-shadow: 0 4px 12px rgba(0,0,0,0.02);
             margin-top: 20px;
@@ -428,41 +467,143 @@
             font-size: 1.15rem;
         }
 
-        /* SECTION 6: 20 THINGS I APPRECIATE ABOUT YOU */
+        /* SECTION 6: APPRECIATION ENVELOPES WITH HEART ACCENTS */
         .grid-envelopes {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 14px;
             width: 100%;
             margin: 25px 0;
+            transition: opacity 0.4s ease;
         }
         .envelope-wrapper {
-            aspect-ratio: 1.2;
+            aspect-ratio: 1.4;
             position: relative;
             cursor: pointer;
-            perspective: 400px;
+            perspective: 600px;
         }
         .envelope-card {
             width: 100%; height: 100%;
-            background: var(--ivory);
-            border: 1px solid rgba(181, 124, 128, 0.25);
+            background: #f7e1e3;
+            border: 1px solid rgba(181, 124, 128, 0.4);
             border-radius: 4px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--pink-dark);
             position: relative;
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
+            transition: all 0.4s ease;
+        }
+        .envelope-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 50%;
+            background: rgba(255,255,255,0.4);
+            clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+            border-bottom: 1px solid rgba(181, 124, 128, 0.2);
+            z-index: 2;
+            transition: transform 0.4s ease;
+            transform-origin: top;
+        }
+        .envelope-heart {
+            font-size: 0.85rem;
+            color: #b0afb5;
+            margin-top: 6px;
+            z-index: 3;
+            transition: color 0.4s ease, transform 0.3s ease;
         }
         .envelope-card.opened {
-            background: var(--pink-soft);
-            color: var(--charcoal);
-            transform: rotateY(20deg);
+            background: #fff0f1;
         }
+        .envelope-card.opened::before {
+            transform: rotateX(180deg) translateY(2px);
+        }
+        .envelope-card.opened .envelope-heart {
+            color: #ef233c;
+            transform: scale(1.25);
+        }
+
+        /* Absolute Center Stage Layout Matrix for Special Envelope 21 */
+        .big-envelope-container {
+            display: none;
+            width: 100%;
+            max-width: 340px;
+            position: absolute;
+            top: 55%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 20;
+            background: transparent;
+        }
+        .golden-envelope-scene {
+            width: 100%;
+            height: 190px;
+            position: relative;
+            perspective: 1000px;
+            margin-top: 15px;
+        }
+        .golden-envelope {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #f7e7c4 0%, #dfba6b 100%);
+            border: 2px solid #c9a352;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(223, 186, 107, 0.6);
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+        }
+        .golden-envelope-flap {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 55%;
+            background: #dfba6b;
+            border: 1px solid #c9a352;
+            clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+            transform-origin: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+        }
+        .golden-envelope.open-flap .golden-envelope-flap {
+            transform: rotateX(180deg);
+        }
+        .golden-envelope-heart {
+            position: absolute;
+            top: 40%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.8rem;
+            color: #ef233c;
+            z-index: 6;
+            animation: heartBeat 1s infinite alternate;
+        }
+        @keyframes heartBeat {
+            from { transform: translate(-50%, -50%) scale(1); }
+            to { transform: translate(-50%, -50%) scale(1.12); }
+        }
+        
+        /* Interactive Letter Slideout Mechanics */
+        .golden-letter-slideout {
+            position: absolute;
+            bottom: 5px; left: 5%; width: 90%;
+            background: #fffdfa;
+            border: 1px solid #dfba6b;
+            border-radius: 8px;
+            padding: 24px 16px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(0) scale(0.9);
+            transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s ease;
+            box-shadow: 0 -8px 20px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+        .golden-envelope.open-letter .golden-letter-slideout {
+            opacity: 1;
+            transform: translateY(-150px) scale(1.05);
+            z-index: 10;
+        }
+
         .envelope-modal {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -490,53 +631,15 @@
             from { opacity: 0; transform: scale(0.85); }
             to { opacity: 1; transform: scale(1); }
         }
-        .golden-envelope-wrapper {
-            display: none;
-            width: 85%;
-            margin: 20px auto;
-            animation: stageFadeIn 0.8s ease forwards;
-        }
-        .golden-card {
-            background: linear-gradient(135deg, #fbf3dd 0%, #dfba6b 100%);
-            border: 2px solid #ceaa5a;
-            color: #574419 !important;
-            box-shadow: 0 8px 25px rgba(223, 186, 107, 0.4);
-            padding: 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
 
-        /* SECTION 7: GALLEY OVERLAY / PAGES */
-        .scrapbook-gallery-slider {
+        /* SECTION 7: 12-PHOTO EXPANDED SCRAPBOOK MATRIX GRID */
+        .scrapbook-album-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
             width: 100%;
-            position: relative;
             margin: 20px 0;
-        }
-        .gallery-page-item {
-            display: none;
-            width: 100%;
-            animation: pageTurnAnim 0.6s ease forwards;
-        }
-        .gallery-page-item.active {
-            display: block;
-        }
-        @keyframes pageTurnAnim {
-            from { transform: rotateY(-30deg) translateX(30px); opacity: 0; }
-            to { transform: rotateY(0deg) translateX(0); opacity: 1; }
-        }
-        .gallery-controls {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        .nav-circle-btn {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            border: 1px solid rgba(181, 124, 128, 0.3);
-            background: white;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            padding: 10px 0;
         }
 
         /* SECTION 8: THE LETTER */
@@ -557,20 +660,32 @@
             overflow-y: auto;
         }
 
-        /* SECTION 9: THE ENDING */
+        /* SECTION 9: GRAND FINALE CELEBRATION HORIZON */
         #ending-section {
-            background: #0f0d1a;
+            background: linear-gradient(180deg, #090811 0%, #171426 100%);
             color: #f0ecf5;
         }
     </style>
 </head>
 <body>
 
-    <!-- Ambient / Background Particle Layer -->
+    <div id="sky-flash-overlay"></div>
     <canvas id="ambient-canvas"></canvas>
 
-    <!-- SECTION 1: GRAND INTRODUCTION -->
-    <section id="intro-section" class="active">
+    <section id="pre-intro-section" class="active">
+        <div class="interactive-layer slide-up-text">
+            <h1 class="serif-heading" style="font-size: 2.8rem; color: var(--gold);">A Golden Horizon Awaits</h1>
+            <p class="handwritten" style="font-size: 2.4rem; margin-top: 10px; color: var(--pink-soft);">Something exquisite is tracking ahead...</p>
+            <p style="margin: 20px 0 35px 0; font-size: 0.95rem; color: #cbc7d4; max-width: 320px; opacity: 0.85;">
+                Before you unlock what lies beyond, prepare to travel through a curated timeline dedicated entirely to your grace.
+            </p>
+            <button class="premium-btn" onclick="routeTo('intro-section')">
+                Enter Experience ✨
+            </button>
+        </div>
+    </section>
+
+    <section id="intro-section">
         <div class="interactive-layer">
             <span class="handwritten">Happy 20th Birthday,</span>
             <h1 class="serif-heading" style="font-size: 2.6rem; margin-top: 5px; color: var(--pink-dark);">Beautiful</h1>
@@ -595,7 +710,6 @@
         </div>
     </section>
 
-    <!-- SECTION 2: MAKE A WISH -->
     <section id="wish-section">
         <div class="interactive-layer">
             <span class="handwritten" style="color: var(--gold);">Before we continue...</span>
@@ -605,11 +719,7 @@
                 <svg class="hold-progress-svg">
                     <circle id="hold-circle" cx="70" cy="70" r="66"></circle>
                 </svg>
-                <button class="hold-btn" id="wish-hold-btn" 
-                        onmousedown="startWishHold()" onmouseup="endWishHold()" 
-                        onmouseleave="endWishHold()" ontouchstart="startWishHold(event)" ontouchend="endWishHold(event)">
-                    ✨
-                </button>
+                <button class="hold-btn" id="wish-hold-btn">✨</button>
             </div>
             
             <p id="wish-instruction" style="font-size: 0.85rem; color: #aaa; letter-spacing: 1px;">PRESS & HOLD BUTTON FOR 3 SECONDS</p>
@@ -623,12 +733,11 @@
         </div>
     </section>
 
-    <!-- SECTION 3: INTERACTIVE BIRTHDAY CAKE -->
     <section id="cake-section">
         <div class="interactive-layer">
-            <span class="handwritten">Time for the traditions</span>
+            <span class="handwritten" style="color: var(--gold);">Time for the traditions</span>
             <h2 class="serif-heading" id="cake-heading" style="font-size: 2rem; margin-bottom: 5px;">Make a wish & blow the candle</h2>
-            <p id="cake-subtext" style="font-size: 0.85rem; color: #888; margin-bottom: 20px;">TAP THE FLAME TO BLOW IT OUT</p>
+            <p id="cake-subtext" style="font-size: 0.85rem; color: #b0aa9e; margin-bottom: 20px;">TAP THE FLAME TO BLOW IT OUT</p>
 
             <div class="cake-container">
                 <canvas class="cake-canvas-overlay" id="cake-canvas"></canvas>
@@ -639,12 +748,10 @@
                 <div class="luxury-cake" id="cake-left-half"></div>
                 <div class="luxury-cake" id="cake-right-half"></div>
                 <div class="cake-stand"></div>
-                <div class="knife-tool" id="cake-knife" 
-                     onmousedown="startCutHold()" onmouseup="endCutHold()" onmouseleave="endCutHold()"
-                     ontouchstart="startCutHold(event)" ontouchend="endCutHold(event)">🔪</div>
+                <div class="knife-tool" id="cake-knife">🔪</div>
             </div>
 
-            <p id="cut-instruction" style="display:none; font-size: 0.85rem; color: var(--pink-dark); letter-spacing: 1px;">PRESS & HOLD KNIFE TO CUT THE CAKE</p>
+            <p id="cut-instruction" style="display:none; font-size: 0.85rem; color: var(--gold); letter-spacing: 1px;">DRAG KNIFE FROM UP TO DOWN TO SLICE THE CAKE IN HALF</p>
 
             <button class="premium-btn" id="btn-cake-next" style="display:none; margin-top: 30px;" onclick="routeTo('gift-section')">
                 Open Your Gift 🎁
@@ -652,7 +759,6 @@
         </div>
     </section>
 
-    <!-- SECTION 4: A LITTLE GIFT FOR YOU -->
     <section id="gift-section">
         <div class="interactive-layer">
             <span class="handwritten">For someone precious</span>
@@ -675,7 +781,6 @@
         </div>
     </section>
 
-    <!-- SECTION 5: WHERE IT ALL BEGAN -->
     <section id="began-section">
         <div class="interactive-layer">
             <div class="scrapbook-desk">
@@ -699,28 +804,40 @@
         </div>
     </section>
 
-    <!-- SECTION 6: 20 THINGS I APPRECIATE ABOUT YOU -->
     <section id="appreciate-section">
-        <div class="interactive-layer">
-            <span class="handwritten">My favorite traits</span>
-            <h2 class="serif-heading" style="font-size: 1.8rem; margin-bottom: 5px;">20 Things I Appreciate About You</h2>
-            <p style="font-size: 0.85rem; color: var(--pink-dark);" id="envelope-counter">0 / 20 Opened</p>
+        <div class="interactive-layer" style="position: relative; min-height: 70vh;">
+            <div id="appreciate-main-content">
+                <span class="handwritten">My favorite traits</span>
+                <h2 class="serif-heading" style="font-size: 1.8rem; margin-bottom: 5px;">20 Things I Appreciate About You</h2>
+                <p style="font-size: 0.85rem; color: var(--pink-dark); margin-bottom: 15px;" id="envelope-counter">0 / 20 Opened</p>
 
-            <div class="grid-envelopes" id="envelopes-grid-container"></div>
-
-            <div class="golden-envelope-wrapper" id="golden-envelope-container">
-                <div class="golden-card" onclick="openGoldenEnvelope()">
-                    ✨ Open Special Envelope 21 ✨
-                </div>
+                <div class="grid-envelopes" id="envelopes-grid-container"></div>
             </div>
 
-            <button class="premium-btn" id="btn-appreciate-next" style="display:none; margin-top: 15px;" onclick="routeTo('gallery-section')">
-                View Our Scrapbook 📸
-            </button>
+            <div class="big-envelope-container" id="golden-envelope-container">
+                <p style="color: var(--gold); font-size: 0.9rem; margin-bottom: 5px; font-weight: 500;">ALL REASONS OPENED.</p>
+                
+                <div class="golden-envelope-scene">
+                    <div class="golden-envelope" id="main-golden-envelope" onclick="openGoldenEnvelope()">
+                        <div class="golden-envelope-flap"></div>
+                        <div class="golden-envelope-heart">♥</div>
+                        
+                        <div class="golden-letter-slideout" id="golden-letter-slideout-id">
+                            <h4 class="serif-heading" style="color: var(--gold); font-size: 1.3rem;">Reason 21 ✨</h4>
+                            <p style="font-size: 0.95rem; font-style: italic; color: var(--charcoal); margin-top: 12px; line-height: 1.5;">
+                                There are countless things I appreciate about you that could never fit into just twenty letters. These are only a few of the many reasons why knowing you has been such a beautiful part of my journey.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="premium-btn" id="btn-appreciate-next" style="display:none; margin-top: 40px;" onclick="routeTo('gallery-section')">
+                    View Our Scrapbook 📸
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- ENVELOPE MODAL CONTAINER -->
     <div class="envelope-modal" id="envelope-reader-modal" onclick="closeEnvelopeModal()">
         <div class="envelope-modal-content" onclick="event.stopPropagation()">
             <span class="handwritten" id="modal-envelope-title" style="font-size: 1.8rem;">Reason</span>
@@ -729,51 +846,32 @@
         </div>
     </div>
 
-    <!-- SECTION 7: OUR SCRAPBOOK -->
     <section id="gallery-section">
-        <div class="interactive-layer">
-            <span class="handwritten">Captured moments</span>
-            <h2 class="serif-heading" style="font-size: 2rem; margin-bottom: 20px;">Our Memories</h2>
-
-            <div class="scrapbook-gallery-slider">
-                <!-- Page 1 -->
-                <div class="gallery-page-item active" data-page="0">
-                    <div class="polaroid" style="--r: 2deg;">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600" alt="Memory 1">
-                        <div class="polaroid-caption">Your Radiant Energy ✨</div>
-                        <p style="font-size:0.85rem; color:#666; font-family:'Cormorant Garamond', serif; font-style:italic; text-align:center;">That specific afternoon where everything felt infinite.</p>
-                    </div>
-                </div>
-                <!-- Page 2 -->
-                <div class="gallery-page-item" data-page="1">
-                    <div class="polaroid" style="--r: -3deg;">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600" alt="Memory 2">
-                        <div class="polaroid-caption">Pure Laughter 🌸</div>
-                        <p style="font-size:0.85rem; color:#666; font-family:'Cormorant Garamond', serif; font-style:italic; text-align:center;">When my absolute favorite sound filled up the entire room.</p>
-                    </div>
-                </div>
-                <!-- Page 3 -->
-                <div class="gallery-page-item" data-page="2">
-                    <div class="polaroid" style="--r: 1deg;">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600" alt="Memory 3">
-                        <div class="polaroid-caption">The Quiet Days ☕</div>
-                        <p style="font-size:0.85rem; color:#666; font-family:'Cormorant Garamond', serif; font-style:italic; text-align:center;">Even the simple pauses become extraordinary when shared with you.</p>
-                    </div>
-                </div>
+        <div class="interactive-layer" style="max-width:550px;">
+            <span class="handwritten">Our collective journey</span>
+            <h2 class="serif-heading" style="font-size: 2rem; margin-bottom: 10px;">Our Memories</h2>
+            
+            <div class="scrapbook-album-grid">
+                <div class="polaroid" style="--r: -3deg;"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300"><div class="polaroid-caption">Smile ✨</div></div>
+                <div class="polaroid" style="--r: 2deg;"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300"><div class="polaroid-caption">Laughter 🌸</div></div>
+                <div class="polaroid" style="--r: -2deg;"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300"><div class="polaroid-caption">Glow ⭐</div></div>
+                <div class="polaroid" style="--r: 4deg;"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300"><div class="polaroid-caption">Joy 🥰</div></div>
+                <div class="polaroid" style="--r: -4deg;"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300"><div class="polaroid-caption">Kindness 🕊️</div></div>
+                <div class="polaroid" style="--r: 3deg;"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300"><div class="polaroid-caption">Peace ☕</div></div>
+                <div class="polaroid" style="--r: -1deg;"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300"><div class="polaroid-caption">Grace 🌾</div></div>
+                <div class="polaroid" style="--r: 2deg;"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300"><div class="polaroid-caption">Wanderlust 🌍</div></div>
+                <div class="polaroid" style="--r: -3deg;"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300"><div class="polaroid-caption">Memories 🎞️</div></div>
+                <div class="polaroid" style="--r: 1deg;"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=300"><div class="polaroid-caption">Bliss 🌅</div></div>
+                <div class="polaroid" style="--r: -2deg;"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300"><div class="polaroid-caption">Sparkle ✨</div></div>
+                <div class="polaroid" style="--r: 4deg;"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300"><div class="polaroid-caption">Forever ❤️</div></div>
             </div>
 
-            <div class="gallery-controls">
-                <button class="nav-circle-btn" onclick="slideGallery(-1)">←</button>
-                <button class="nav-circle-btn" onclick="slideGallery(1)">→</button>
-            </div>
-
-            <button class="premium-btn" style="margin-top: 35px;" onclick="routeTo('letter-section')">
+            <button class="premium-btn" style="margin-top: 25px;" onclick="routeTo('letter-section')">
                 Read My Letter ✉️
             </button>
         </div>
     </section>
 
-    <!-- SECTION 8: THE LETTER -->
     <section id="letter-section">
         <div class="interactive-layer">
             <span class="handwritten">From me to you</span>
@@ -797,34 +895,45 @@
         </div>
     </section>
 
-    <!-- SECTION 9: THE ENDING -->
     <section id="ending-section">
-        <div class="interactive-layer" style="max-width: 400px;">
-            <h1 class="serif-heading" style="font-size: 2.5rem; color: var(--gold);">Happy Birthday.</h1>
-            <p class="handwritten" style="font-size: 2.2rem; margin-top: 5px; color:#fff;">Beautiful</p>
+        <div class="interactive-layer" style="max-width: 420px;" id="ending-entrance-container">
+            <h1 class="serif-heading" style="font-size: 2.8rem; color: var(--gold); text-shadow: 0 4px 15px rgba(0,0,0,0.6);">Happy 20th Birthday!</h1>
+            <p class="handwritten" style="font-size: 2.5rem; margin-top: 5px; color:#fff;">Beautiful</p>
             
-            <div style="margin: 30px 0; display: flex; flex-direction: column; gap: 15px; font-size: 0.95rem; color: #cbc7d4; line-height: 1.7;">
+            <div style="margin: 30px 0; display: flex; flex-direction: column; gap: 15px; font-size: 1rem; color: #cbc7d4; line-height: 1.7; font-style: italic;">
                 <p>"Thank you for being part of so many beautiful memories."</p>
-                <p>"I hope your twenties bring happiness, success, peace, good health, and countless reasons to smile."</p>
+                <p>"May your twenties be packed with absolute happiness, magnificent success, internal peace, perfect good health, and infinite reasons to smile."</p>
+                <p style="color: var(--gold); font-weight: 500; font-style: normal; margin-top: 10px;">The world is indefinitely a warmer place because you exist inside of it.</p>
             </div>
 
             <button class="premium-btn" style="background: transparent; color: var(--gold); border-color: var(--gold);" onclick="restartJourney()">
                 Restart Journey ❤️
             </button>
 
-            <p style="margin-top: 40px; font-size: 0.75rem; color: #6a6475; letter-spacing: 1px;">
+            <p style="margin-top: 35px; font-size: 0.75rem; color: #6a6475; letter-spacing: 1px;">
                 MADE WITH LOVE, MEMORIES, AND GRATITUDE
             </p>
         </div>
     </section>
 
-    <!-- Scripting Infrastructure -->
     <script>
-        /* Global Ambient Particle & Event Engine */
+        function triggerHaptic(type) {
+            if (!("vibrate" in navigator)) return;
+            if (type === 'light') navigator.vibrate(15);
+            else if (type === 'medium') navigator.vibrate(35);
+            else if (type === 'heavy') navigator.vibrate(60);
+            else if (type === 'success') navigator.vibrate([40, 30, 40]);
+        }
+
+        document.querySelectorAll('.premium-btn, .envelope-card, .nav-circle-btn').forEach(elem => {
+            elem.addEventListener('click', () => triggerHaptic('light'));
+        });
+
+        /* Global Canvas Render Layer Engine */
         const ambientCanvas = document.getElementById('ambient-canvas');
         const actx = ambientCanvas.getContext('2d');
         let ambientParticles = [];
-        let canvasMode = 'default'; // 'default', 'stars', 'fireworks'
+        let canvasMode = 'default';
 
         function resizeCanvas() {
             ambientCanvas.width = window.innerWidth;
@@ -836,21 +945,28 @@
         class AmbientParticle {
             constructor(x, y, type) {
                 this.x = x || Math.random() * ambientCanvas.width;
-                this.y = y || Math.random() * ambientCanvas.height + (type === 'lantern' ? ambientCanvas.height : 0);
+                this.y = y || Math.random() * ambientCanvas.height + (type === 'lantern' || type === 'balloon' ? ambientCanvas.height : 0);
                 this.type = type || (Math.random() > 0.4 ? 'sparkle' : 'heart');
                 this.size = Math.random() * 3 + 2;
-                this.speedY = this.type === 'lantern' ? -(Math.random() * 0.8 + 0.4) : -(Math.random() * 0.7 + 0.3);
-                this.speedX = Math.sin(Math.random() * 2) * 0.3;
+                if(this.type === 'balloon') {
+                    this.size = Math.random() * 15 + 15;
+                    this.color = ['#f7d6d8','#b57c80','#dfba6b','#e8e5f2'][Math.floor(Math.random()*4)];
+                    this.speedY = -(Math.random() * 1 + 0.6);
+                    this.speedX = Math.random() * 0.4 - 0.2;
+                } else {
+                    this.speedY = this.type === 'lantern' ? -(Math.random() * 0.8 + 0.4) : -(Math.random() * 0.7 + 0.3);
+                    this.speedX = Math.sin(Math.random() * 2) * 0.3;
+                    this.color = this.type === 'lantern' ? '#dfba6b' : '#f7d6d8';
+                }
                 this.alpha = Math.random() * 0.6 + 0.3;
-                this.color = this.type === 'lantern' ? '#dfba6b' : '#f7d6d8';
                 this.angle = Math.random() * Math.PI * 2;
             }
             update() {
                 this.y += this.speedY;
                 this.x += this.speedX + Math.sin(this.angle) * 0.2;
                 this.angle += 0.01;
-                if (this.y < -20) {
-                    this.y = ambientCanvas.height + 20;
+                if (this.y < -40) {
+                    this.y = ambientCanvas.height + 40;
                     this.x = Math.random() * ambientCanvas.width;
                 }
             }
@@ -871,6 +987,17 @@
                     actx.beginPath();
                     actx.rect(this.x, this.y, this.size * 1.5, this.size * 2);
                     actx.fill();
+                } else if (this.type === 'balloon') {
+                    actx.fillStyle = this.color;
+                    actx.beginPath();
+                    actx.ellipse(this.x, this.y, this.size * 0.7, this.size, 0, 0, Math.PI * 2);
+                    actx.fill();
+                    actx.strokeStyle = 'rgba(235,235,235,0.4)';
+                    actx.lineWidth = 1;
+                    actx.beginPath();
+                    actx.moveTo(this.x, this.y + this.size);
+                    actx.lineTo(this.x + Math.sin(this.angle)*5, this.y + this.size + 25);
+                    actx.stroke();
                 } else {
                     actx.fillStyle = canvasMode === 'stars' ? '#ffffff' : '#dfba6b';
                     actx.beginPath();
@@ -881,7 +1008,6 @@
             }
         }
 
-        // Initialize Ambient Assets
         for(let i=0; i<45; i++) {
             ambientParticles.push(new AmbientParticle());
         }
@@ -894,40 +1020,44 @@
                     p.draw();
                 });
             } else {
-                // Firework Mode Handling via unique engine frame
                 handleFireworkTick();
             }
             requestAnimationFrame(runAmbientEngine);
         }
         runAmbientEngine();
 
-
-        /* Global Route Navigator */
+        /* Global Stage Routing Coordinate Logic */
         function routeTo(stageId) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             const target = document.getElementById(stageId);
             target.classList.add('active');
             window.scrollTo(0,0);
+            triggerHaptic('medium');
 
-            // Adaptive Canvas Settings per view state
-            if (stageId === 'wish-section') {
+            if(stageId === 'intro-section') {
+                document.getElementById('intro-section').querySelector('.interactive-layer').classList.add('slide-up-text');
+            } else if (stageId === 'wish-section') {
                 canvasMode = 'stars';
                 ambientParticles = [];
                 for(let i=0; i<60; i++) ambientParticles.push(new AmbientParticle(null, null, 'sparkle'));
-            } else if (stageId === 'intro-section' || stageId === 'began-section' || stageId === 'appreciate-section' || stageId === 'gallery-section') {
+            } else if (stageId === 'cake-section') {
+                canvasMode = 'default';
+                for(let i=0; i<25; i++) ambientParticles.push(new AmbientParticle(null, null, 'sparkle'));
+            } else if (stageId === 'began-section' || stageId === 'appreciate-section' || stageId === 'gallery-section') {
                 canvasMode = 'default';
             } else if (stageId === 'ending-section') {
                 canvasMode = 'fireworks';
                 initFireworkEngine();
-                // Append lanterns
+                // Pop both balloons & lanterns into ending framework background context loops
+                for(let i=0; i<20; i++) ambientParticles.push(new AmbientParticle(null, null, 'balloon'));
                 for(let i=0; i<20; i++) ambientParticles.push(new AmbientParticle(null, null, 'lantern'));
+                document.getElementById('ending-entrance-container').classList.add('slide-up-text');
             }
         }
 
         function restartJourney() {
             location.reload();
         }
-
 
         /* SECTION 1: TIMELINE RUNNER */
         let currentYear = 1;
@@ -936,24 +1066,37 @@
         const transitionBox = document.getElementById('intro-transition-box');
         const startBtn = document.getElementById('btn-start-journey');
 
-        const timelineInterval = setInterval(() => {
-            currentYear++;
-            let percentage = ((currentYear - 1) / 19) * 100;
-            progressBar.style.width = percentage + '%';
-            movingNode.style.left = percentage + '%';
-            movingNode.innerText = currentYear;
+        function startTimelineTicker() {
+            const timelineInterval = setInterval(() => {
+                currentYear++;
+                let percentage = ((currentYear - 1) / 19) * 100;
+                progressBar.style.width = percentage + '%';
+                movingNode.style.left = percentage + '%';
+                movingNode.innerText = currentYear;
+                triggerHaptic('light');
 
-            if (currentYear >= 20) {
-                clearInterval(timelineInterval);
-                setTimeout(() => {
-                    transitionBox.classList.add('visible');
-                    startBtn.style.display = 'inline-flex';
-                    triggerIntroFlash();
-                }, 400);
-            }
-        }, 150);
+                if (currentYear >= 20) {
+                    clearInterval(timelineInterval);
+                    setTimeout(() => {
+                        transitionBox.classList.add('visible');
+                        startBtn.style.display = 'inline-flex';
+                        triggerIntroFlash();
+                    }, 400);
+                }
+            }, 150);
+        }
+
+        const introObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if(mutation.target.classList.contains('active') && currentYear === 1) {
+                    startTimelineTicker();
+                }
+            });
+        });
+        introObserver.observe(document.getElementById('intro-section'), { attributes: true });
 
         function triggerIntroFlash() {
+            triggerHaptic('heavy');
             let flash = document.createElement('div');
             flash.style.position = 'fixed';
             flash.style.inset = 0;
@@ -967,27 +1110,33 @@
             }, 50);
         }
 
-
-        /* SECTION 2: WISH PRESS AND HOLD LOGIC */
+        /* SECTION 2: WISH PRESS ENGINE */
         let wishTimer = null;
         let wishProgress = 0;
         const holdCircle = document.getElementById('hold-circle');
         const wishInstruction = document.getElementById('wish-instruction');
         const wishSuccess = document.getElementById('wish-success-msg');
         const wishNextBtn = document.getElementById('btn-wish-next');
+        const wishBtnElement = document.getElementById('wish-hold-btn');
+
+        wishBtnElement.style.webkitUserSelect = 'none';
+        wishBtnElement.style.userSelect = 'none';
+        wishBtnElement.style.webkitTouchCallout = 'none';
 
         function startWishHold(e) {
-            if(e) e.preventDefault();
+            if(e) { e.preventDefault(); if(e.touches && e.touches.length > 1) return; }
             if(wishProgress >= 100) return;
+            
+            wishBtnElement.classList.add('pulsing');
+            clearInterval(wishTimer);
             wishTimer = setInterval(() => {
-                wishProgress += 2.5; // Controls hold speed
+                wishProgress += 2.5; 
                 if(wishProgress > 100) wishProgress = 100;
                 
-                // SVG Dash offset update (415 to 0)
                 let offset = 415 - (415 * (wishProgress / 100));
                 holdCircle.style.strokeDashoffset = offset;
                 
-                // Intensify background sparkles
+                triggerHaptic('light');
                 ambientParticles.push(new AmbientParticle(Math.random()*ambientCanvas.width, Math.random()*ambientCanvas.height, 'sparkle'));
 
                 if(wishProgress >= 100) {
@@ -998,68 +1147,158 @@
         }
 
         function endWishHold(e) {
+            if(e) e.preventDefault();
+            wishBtnElement.classList.remove('pulsing');
             if(wishProgress >= 100) return;
             clearInterval(wishTimer);
             wishProgress = 0;
             holdCircle.style.strokeDashoffset = 415;
         }
 
+        wishBtnElement.addEventListener('touchstart', startWishHold, { passive: false });
+        wishBtnElement.addEventListener('touchend', endWishHold, { passive: false });
+        wishBtnElement.addEventListener('touchcancel', endWishHold, { passive: false });
+        wishBtnElement.addEventListener('mousedown', startWishHold);
+        wishBtnElement.addEventListener('mouseup', endWishHold);
+        wishBtnElement.addEventListener('mouseleave', endWishHold);
+
         function completeWishStage() {
-            document.getElementById('wish-hold-btn').style.display = 'none';
+            triggerHaptic('success');
+            wishBtnElement.style.display = 'none';
             wishInstruction.style.display = 'none';
             wishSuccess.style.display = 'block';
-            wishNextBtn.style.style = 'inline-flex';
             wishNextBtn.style.display = 'inline-flex';
         }
 
-
-        /* SECTION 3: CAKE BLOWING AND CUTTING SYSTEM */
+        /* SECTION 3: DARK-THEMED CAKE BLOW & UPWARD CLIMBING ROCKET SYSTEM */
         const cakeCanvas = document.getElementById('cake-canvas');
         const cctx = cakeCanvas.getContext('2d');
         let cakeParticles = [];
         let candleBlown = false;
+        let rocketModeActive = false;
+        let rocketX = 130;
+        let rocketY = 130;
 
         function blowCandle() {
             if(candleBlown) return;
-            document.getElementById('main-flame').style.display = 'none';
             candleBlown = true;
-            document.getElementById('cake-heading').innerText = "Make your wish come true...";
-            document.getElementById('cake-subtext').style.display = 'none';
+            triggerHaptic('medium');
             
-            // Trigger cinematic rocket and firework simulation
-            triggerCakeRocket();
+            // Candle vanishes completely right away upon trigger tap click
+            document.getElementById('interactive-candle').style.display = 'none';
+            
+            document.getElementById('cake-heading').innerText = "Light the firecracker rocket!";
+            document.getElementById('cake-subtext').innerText = "THE ROCKET SITS READY ON THE CAKE";
+            
+            rocketModeActive = true;
+            rocketX = 130;
+            rocketY = 120; 
+            renderCakeRocketBaseStatic();
         }
 
-        function triggerCakeRocket() {
-            let rocketY = 400;
-            let rocketX = 200;
+        function renderCakeRocketBaseStatic() {
+            cctx.clearRect(0, 0, cakeCanvas.width, cakeCanvas.height);
+            // Draw standard explosive rocket body structure on cake
+            cctx.fillStyle = '#ef233c';
+            cctx.fillRect(rocketX - 6, rocketY, 12, 26);
+            cctx.fillStyle = '#dfba6b';
+            cctx.beginPath();
+            cctx.moveTo(rocketX - 6, rocketY);
+            cctx.lineTo(rocketX + 6, rocketY);
+            cctx.lineTo(rocketX, rocketY - 10);
+            cctx.fill();
+            
+            revealKnifeMechanism();
+        }
+
+        function revealKnifeMechanism() {
+            const knife = document.getElementById('cake-knife');
+            knife.classList.add('visible');
+            document.getElementById('cut-instruction').style.display = 'block';
+            
+            knife.style.webkitUserSelect = 'none';
+            knife.style.userSelect = 'none';
+            knife.style.webkitTouchCallout = 'none';
+        }
+
+        /* Slicing tracking mechanical track handlers triggers rocket launch concurrently */
+        let activeCut = false;
+        let startCutY = 0;
+        const knifeEl = document.getElementById('cake-knife');
+
+        function dragCutStart(e) {
+            e.preventDefault();
+            activeCut = true;
+            knifeEl.classList.add('cutting');
+            startCutY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            // Launch the firecracker rocket upward the exact split second she clicks and drags
+            launchFirecrackerRocketUpward();
+        }
+
+        function launchFirecrackerRocketUpward() {
+            if(!rocketModeActive) return;
+            rocketModeActive = false;
             
             let rocketInterval = setInterval(() => {
-                cctx.clearRect(0,0, cakeCanvas.width, cakeCanvas.height);
-                // Draw rising rocket particle
+                cctx.clearRect(0, 0, cakeCanvas.width, cakeCanvas.height);
+                triggerHaptic('light');
+                
+                // Render Climbing Rocket Frame
+                cctx.fillStyle = '#ef233c';
+                cctx.fillRect(rocketX - 6, rocketY, 12, 26);
                 cctx.fillStyle = '#dfba6b';
                 cctx.beginPath();
-                cctx.arc(rocketX, rocketY, 5, 0, Math.PI*2);
+                cctx.moveTo(rocketX - 6, rocketY);
+                cctx.lineTo(rocketX + 6, rocketY);
+                cctx.lineTo(rocketX, rocketY - 10);
                 cctx.fill();
                 
-                rocketY -= 8;
-                if(rocketY <= 120) {
-                    clearInterval(rocketInterval);
-                    explodeCakeFirework(rocketX, rocketY);
+                // Trail spit fire sparkles
+                for(let i=0; i<5; i++) {
+                    cakeParticles.push({
+                        x: rocketX + (Math.random()*12 - 6), y: rocketY + 26,
+                        vx: Math.random()*4 - 2, vy: Math.random()*2 + 2,
+                        alpha: 0.9, color: '#ffb5a7', size: Math.random()*4 + 1
+                    });
                 }
-            }, 20);
+                
+                cakeParticles.forEach((p, idx) => {
+                    p.x += p.vx; p.y += p.vy; p.alpha -= 0.04;
+                    if(p.alpha > 0) {
+                        cctx.fillStyle = p.color;
+                        cctx.fillRect(p.x, p.y, p.size, p.size);
+                    } else { cakeParticles.splice(idx, 1); }
+                });
+                
+                rocketY -= 14; // Quick upward vector layout velocity shift
+                
+                if(rocketY <= -30) {
+                    clearInterval(rocketInterval);
+                    triggerGrandCakeExplosion(rocketX, 40);
+                }
+            }, 25);
         }
 
-        function explodeCakeFirework(x, y) {
-            for(let i=0; i<80; i++) {
+        function triggerGrandCakeExplosion(x, y) {
+            // Screen lightning ambient flash layout mapping overlays
+            const flash = document.getElementById('sky-flash-overlay');
+            flash.style.opacity = '0.95';
+            triggerHaptic('heavy');
+            setTimeout(() => { flash.style.opacity = '0'; }, 140);
+
+            document.getElementById('cake-heading').innerText = "Magnificent Chapter 20!";
+
+            for(let i=0; i<140; i++) {
                 let angle = Math.random() * Math.PI * 2;
-                let speed = Math.random() * 5 + 2;
+                let speed = Math.random() * 9 + 3;
                 cakeParticles.push({
                     x: x, y: y,
                     vx: Math.cos(angle) * speed,
                     vy: Math.sin(angle) * speed,
                     alpha: 1,
-                    color: `hsl(${Math.random()*360}, 80%, 70%)`
+                    size: Math.random()*5 + 2,
+                    color: `hsl(${Math.random()*360}, 100%, 75%)`
                 });
             }
 
@@ -1068,105 +1307,96 @@
                 let alive = false;
                 
                 cakeParticles.forEach(p => {
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.vy += 0.08; // gravity
-                    p.alpha -= 0.02;
-                    
+                    p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.alpha -= 0.015;
                     if(p.alpha > 0) {
                         alive = true;
                         cctx.save();
                         cctx.globalAlpha = p.alpha;
                         cctx.fillStyle = p.color;
                         cctx.beginPath();
-                        cctx.arc(p.x, p.y, 3, 0, Math.PI*2);
+                        cctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
                         cctx.fill();
                         cctx.restore();
                     }
                 });
 
-                if(!alive) {
-                    clearInterval(explosionInterval);
-                    revealKnifeMechanism();
-                }
+                if(!alive) { clearInterval(explosionInterval); }
             }, 25);
         }
 
-        function revealKnifeMechanism() {
-            document.getElementById('cake-heading').innerText = "Happy 20th Birthday!";
-            const knife = document.getElementById('cake-knife');
-            knife.classList.add('visible');
-            document.getElementById('cut-instruction').style.display = 'block';
-        }
+        document.addEventListener('touchmove', function(e) {
+            if(!activeCut) return;
+            e.preventDefault();
+            let currentY = e.touches[0].clientY;
+            let diffY = currentY - startCutY;
+            if(diffY > 0 && diffY < 140) {
+                knifeEl.style.top = (20 + diffY) + 'px';
+                triggerHaptic('light');
+            }
+            if(diffY >= 120) {
+                activeCut = false;
+                executeCakeCut();
+            }
+        }, { passive: false });
 
-        let cutTimer = null;
-        let cutProgress = 0;
+        document.addEventListener('mousemove', function(e) {
+            if(!activeCut) return;
+            let diffY = e.clientY - startCutY;
+            if(diffY > 0 && diffY < 140) {
+                knifeEl.style.top = (20 + diffY) + 'px';
+                triggerHaptic('light');
+            }
+            if(diffY >= 120) {
+                activeCut = false;
+                executeCakeCut();
+            }
+        });
 
-        function startCutHold(e) {
-            if(e) e.preventDefault();
-            cutTimer = setInterval(() => {
-                cutProgress += 5;
-                if(cutProgress >= 100) {
-                    clearInterval(cutTimer);
-                    executeCakeCut();
-                }
-            }, 50);
-        }
-        function endCutHold() {
-            clearInterval(cutTimer);
-        }
+        document.addEventListener('mouseup', () => { if(activeCut) { activeCut = false; knifeEl.classList.remove('cutting'); knifeEl.style.top = '20px'; } });
+        document.addEventListener('touchend', () => { if(activeCut) { activeCut = false; knifeEl.classList.remove('cutting'); knifeEl.style.top = '20px'; } });
+
+        knifeEl.addEventListener('mousedown', dragCutStart);
+        knifeEl.addEventListener('touchstart', dragCutStart, { passive: false });
 
         function executeCakeCut() {
-            document.getElementById('cake-knife').style.display = 'none';
+            triggerHaptic('success');
+            knifeEl.style.display = 'none';
             document.getElementById('cut-instruction').style.display = 'none';
-            document.getElementById('interactive-candle').style.display = 'none';
             
             document.getElementById('cake-left-half').classList.add('cake-cut-left');
             document.getElementById('cake-right-half').classList.add('cake-cut-right');
             
-            // Trigger immediate local canvas confetti explosion
             for(let i=0; i<60; i++) {
                 let angle = Math.random() * Math.PI * 2;
-                let speed = Math.random() * 6 + 3;
+                let speed = Math.random() * 5 + 2;
                 cakeParticles.push({
-                    x: 200, y: 250,
+                    x: 130, y: 240,
                     vx: Math.cos(angle) * speed,
                     vy: Math.sin(angle) * speed,
-                    alpha: 1,
-                    color: ['#f7d6d8','#b57c80','#e8e5f2','#dfba6b'][Math.floor(Math.random()*4)]
+                    alpha: 1, size: 5,
+                    color: ['#dfba6b','#b57c80','#f7d6d8','#fff'][Math.floor(Math.random()*4)]
                 });
             }
             
-            let confettiInterval = setInterval(() => {
-                cctx.clearRect(0,0, cakeCanvas.width, cakeCanvas.height);
-                let alive = false;
+            let sliceConfettiInterval = setInterval(() => {
                 cakeParticles.forEach(p => {
-                    p.x += p.vx; p.y += p.vy; p.vy += 0.1; p.alpha -= 0.025;
-                    if(p.alpha > 0) {
-                        alive = true;
-                        cctx.save(); cctx.globalAlpha = p.alpha; cctx.fillStyle = p.color;
-                        cctx.fillRect(p.x, p.y, 6, 6); cctx.restore();
-                    }
+                    p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.alpha -= 0.03;
                 });
-                if(!alive) clearInterval(confettiInterval);
-            }, 25);
+            }, 30);
 
             setTimeout(() => {
                 document.getElementById('btn-cake-next').style.display = 'inline-flex';
-            }, 600);
+            }, 800);
         }
-
 
         /* SECTION 4: GIFT SYSTEM */
         function openGiftBox() {
+            triggerHaptic('heavy');
             document.getElementById('premium-gift-box').classList.add('opened');
-            setTimeout(() => {
-                routeTo('began-section');
-            }, 900);
+            setTimeout(() => { routeTo('began-section'); }, 900);
         }
 
-
-        /* SECTION 6: 20 ENVELOPES ARRAYS & MANAGEMENT */
+        /* SECTION 6: ENVELOPES ACCENTS MATRIX & ABSOLUTE CENTERING ENVELOPE 21 */
         const appreciations = [
             "Your brilliant empathy and the way you carefully look out for everyone.",
             "The radiant light you effortlessly bring into any space you walk into.",
@@ -1194,7 +1424,6 @@
         let openedCount = 0;
         let openedStates = new Array(20).fill(false);
 
-        // Populate Envelope Grid System
         appreciations.forEach((item, index) => {
             let wrapper = document.createElement('div');
             wrapper.classList.add('envelope-wrapper');
@@ -1203,13 +1432,14 @@
             let card = document.createElement('div');
             card.classList.add('envelope-card');
             card.id = `envelope-${index}`;
-            card.innerText = index + 1;
+            card.innerHTML = `<span>${index + 1}</span><div class="envelope-heart">♥</div>`;
 
             wrapper.appendChild(card);
             gridContainer.appendChild(wrapper);
         });
 
         function openEnvelope(idx) {
+            triggerHaptic('light');
             if(!openedStates[idx]) {
                 openedStates[idx] = true;
                 openedCount++;
@@ -1217,103 +1447,76 @@
                 document.getElementById('envelope-counter').innerText = `${openedCount} / 20 Opened`;
             }
 
-            // Fire Modal Content Trigger
             document.getElementById('modal-envelope-title').innerText = `Reason #${idx + 1}`;
             document.getElementById('modal-envelope-text').innerText = appreciations[idx];
             document.getElementById('envelope-reader-modal').style.display = 'flex';
 
-            // Verify if sequence target is achieved
             if(openedCount === 20) {
+                // Instantly lower down grid text layers visibility seamlessly to map out envelope 21 center focus
+                document.getElementById('appreciate-main-content').style.opacity = '0.05';
+                document.getElementById('appreciate-main-content').style.pointerEvents = 'none';
+                
                 document.getElementById('golden-envelope-container').style.display = 'block';
+                triggerHaptic('success');
             }
         }
 
         function closeEnvelopeModal() {
             document.getElementById('envelope-reader-modal').style.display = 'none';
+            triggerHaptic('light');
         }
 
         function openGoldenEnvelope() {
-            document.getElementById('modal-envelope-title').innerText = `Letter 21 ✨`;
-            document.getElementById('modal-envelope-text').innerText = "There are countless things I appreciate about you that could never fit into just twenty letters. These are only a few of the many reasons why knowing you has been such a beautiful part of my journey.";
-            document.getElementById('envelope-reader-modal').style.display = 'flex';
-            document.getElementById('btn-appreciate-next').style.display = 'inline-flex';
+            triggerHaptic('heavy');
+            const goldenEnv = document.getElementById('main-golden-envelope');
+            
+            // Flap turns completely over open
+            goldenEnv.classList.add('open-flap');
+            
+            // Letter sliding outwards upwards smoothly from inside boundaries
+            setTimeout(() => {
+                goldenEnv.classList.add('open-letter');
+                document.getElementById('btn-appreciate-next').style.display = 'inline-flex';
+            }, 600);
         }
 
-
-        /* SECTION 7: SCRAPBOOK GALLERY SLIDER */
-        let currentGalleryPage = 0;
-        const totalGalleryPages = document.querySelectorAll('.gallery-page-item').length;
-
-        function slideGallery(direction) {
-            const pages = document.querySelectorAll('.gallery-page-item');
-            pages[currentGalleryPage].classList.remove('active');
-            
-            currentGalleryPage += direction;
-            if(currentGalleryPage >= totalGalleryPages) currentGalleryPage = 0;
-            if(currentGalleryPage < 0) currentGalleryPage = totalGalleryPages - 1;
-            
-            pages[currentGalleryPage].classList.add('active');
-        }
-
-
-        /* HIGH-PERFORMANCE GRAND FINALE FIREWORK ENGINE */
+        /* GRAND FINALE FIREWORK ENGINE */
         let fParticles = [];
-        function initFireworkEngine() {
-            fParticles = [];
-        }
+        function initFireworkEngine() { fParticles = []; }
 
         function spawnEndingFirework() {
             let x = Math.random() * ambientCanvas.width;
             let y = Math.random() * (ambientCanvas.height * 0.5) + 100;
             let color = `hsl(${Math.random()*360}, 85%, 65%)`;
+            triggerHaptic('medium');
             for(let i=0; i<50; i++) {
                 let angle = Math.random() * Math.PI * 2;
                 let speed = Math.random() * 4 + 1;
                 fParticles.push({
-                    x: x, y: y,
-                    vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed,
-                    alpha: 1,
-                    color: color
+                    x: x, y: y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, alpha: 1, color: color
                 });
             }
         }
 
         function handleFireworkTick() {
-            // Soft screen trail fade mechanism
             actx.fillStyle = 'rgba(15, 13, 26, 0.15)';
             actx.fillRect(0, 0, ambientCanvas.width, ambientCanvas.height);
 
-            // Randomly seed new explosions
-            if(Math.random() < 0.04) {
-                spawnEndingFirework();
-            }
+            if(Math.random() < 0.04) { spawnEndingFirework(); }
 
             fParticles.forEach((p, index) => {
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vy += 0.04; // low gravity
-                p.alpha -= 0.015;
-
-                if(p.alpha <= 0) {
-                    fParticles.splice(index, 1);
-                } else {
-                    actx.save();
-                    actx.globalAlpha = p.alpha;
-                    actx.fillStyle = p.color;
-                    actx.beginPath();
-                    actx.arc(p.x, p.y, 2.5, 0, Math.PI*2);
-                    actx.fill();
-                    actx.restore();
+                p.x += p.vx; p.y += p.vy; p.vy += 0.04; p.alpha -= 0.015;
+                if(p.alpha <= 0) { fParticles.splice(index, 1); } 
+                else {
+                    actx.save(); actx.globalAlpha = p.alpha; actx.fillStyle = p.color;
+                    actx.beginPath(); actx.arc(p.x, p.y, 2.5, 0, Math.PI*2); actx.fill(); actx.restore();
                 }
             });
 
-            // Maintain continuous rendering updates for lanterns alongside fireworks
             ambientParticles.forEach(lp => {
-                if (lp.type === 'lantern') {
-                    lp.y += lp.speedY;
+                if (lp.type === 'lantern' || lp.type === 'balloon') {
+                    lp.update();
                     lp.draw();
-                    if(lp.y < -20) lp.y = ambientCanvas.height + 20;
                 }
             });
         }
